@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<base href="/iau/">
+
+  <link rel="stylesheet" type="text/css" href="/stylesheets/mpc.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/table-sorter.css">
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+  <link media="all" rel="stylesheet" href="/css/all.css">
+
+  <link rel="icon" type="image/png" href="/iau/figs/MPClogo16.png">
+  <meta name="description" content="We are the official body that deals with
+      astrometric observations and orbits of minor planets (asteroids) and comets.">
+
+  <meta name="keywords" content="astrometry, observations, orbits,
+      minor planets, asteroids, comets, near earth objects, 
+      potentially hazardous asteroids">
+
+  <script type="text/javascript" src="/js/jquery-latest.js"></script>
+<!--  <script type="text/javascript" src="/js/jquery.main.js"></script> -->
+<!--  <script type="text/javascript" src="/js/jquery.metadata.js"></script> -->
+  <script type="text/javascript" src="/js/jquery.tablesorter.js"></script>
+  <script type="text/javascript" src="/js/webtrends.js"></script>
+  <script type="text/javascript" src="/js/track_pdfs.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+
+<title>MPEC 2021-T62 : 2021 TB1</title>
+<META name="description" content="We are the official body that deals
+with astrometric observations and orbits of minor planets (asteroids) and comets.">
+<META name="keywords" content="astrometry, observations, observation, orbits,
+orbit, minor planets, minor planet, asteroids, asteroid, comets, comet">
+</head>
+<!-- Body preamble -->
+
+<body>
+  <!-- wrapper -->
+  <div id="wrapper">
+    <div class="w1">
+      <!-- header -->
+      <header id="header">
+        <div class="holder">
+          <!-- logo -->
+          <h1 class="logo"><a href="/">The International Astronomical Union Minor Planet Center</a></h1>
+          <div class="area">
+            <!-- top-nav -->
+            <nav class="top-nav">
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+		<!-- Contact link changed to Jira -->
+                <li><a href="https://mpc-service.atlassian.net/servicedesk/customer/portals">Contact</a></li>
+              </ul>
+            </nav>
+            <!-- search-form -->
+            <div class="form-holder">
+              <!-- This commented code opens a new page for the search. -->
+              <!--<form class="search-form" method="get" action="https://www.google.com/search" target="_blank">-->
+              <form class="search-form" method="get" action="https://www.google.com/search">
+                <fieldset>
+                  <!--<label for="search">Search</label>-->
+                  <input type="hidden" name="sitesearch" value="minorplanetcenter.net">
+                  <input type="text" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;" id="search" name="q" value="Search MPC">
+                </fieldset>
+              </form>
+            </div>
+            <div class="social-bar">
+<!--              <a href="https://twitter.com/MinorPlanetCtr"><span class="social twitter">L</span></a> -->
+<!--              <a href="https://www.facebook.com/MinorPlanetCenter"><span class="social facebook">F</span></a> -->
+<!--              <a href="https://www.youtube.com/channel/UCtALMOQHuBxh5XMsYNiDhMg"><span class="social youtube">X</span></a> -->
+<!--              <a href="/iau/rss/mpc_feeds.html"><span class="social rss">R</span></a> -->
+            </div>
+          </div>
+        </div>
+        <nav class="nav-holder">
+          <!-- main navigation -->
+          <ul id="nav">
+            <li>
+              <a href="/iau/mpc.html"><span>OBSERVERS</span></a>
+              <ul>
+                <li><a href="/iau/MPEph/MPEph.html">Ephemeris Service</a></li>
+                <li><a href="/mpec/RecentMPECs.html">MPECs</a></li>
+                <li><a href="/iau/NEO/toconfirm_tabular.html">NEO Confirmation</a></li>
+                <li><a href="/iau/NEO/pccp_tabular.html">Possible Comet Confirmation</a></li>
+                <li><a href="/iau/Ephemerides/EphemOrbEls.html" class="nested">Orbital Elements</a>
+                  <ul>
+                    <li><a href="/iau/MPCORB.html">MPCORB</a></li>
+                    <li><a href="/iau/ECS/MPCAT/MPCAT.html">MPCAT</a></li>
+                    <li><a href="/iau/ECS/MPCUPDATE/MPCUPDATE.html">MPCUPDATE</a></li>
+                    <li><a href="/iau/Ephemerides/SoftwareEls.html">Orbital Elements for Software</a></li>
+                  </ul>                
+                </li>
+                <li><a href="/iau/services/MPCServices.html">Publications Overview</a></li>
+                <li><a href="/iau/ECS/MPCArchive/MPCArchive_TBL.html">Publications Archive</a></li>              
+                <li><a href="/iau/NEO/TheNEOPage.html" class="nested">NEO Services</a>
+                  <ul>
+                    <li><a href="/iau/NEO/toconfirm_tabular.html">Confirmation</a></li>
+                    <li><a href="/iau/NEO/PossNEO.html">Ratings</a></li>
+                    <li><a href="/cgi-bin/neaobs.cgi">Observation Planning Aid</a></li>
+                    <li><a href="/cgi-bin/checkneo.cgi">NEOChecker</a></li>
+                    <li><a href="/cgi-bin/checkneocmt.cgi">NEOCMTChecker</a></li>
+                    <li><a href="/neocp_followup_report/">NEOCP Followup Report Form</a></li>
+                    <li><a href="/neocp_followup_reports/">NEOCP Followup Reports</a></li>
+                    <li><a href="/neocp_obs">NEOCP Recent Observations</a></li>
+                    <li><a href="/iau/recovery/recovery.html">NEO Recovery</a></li>
+                  </ul>
+                </li>
+                <li><a href="/iau/services/WebCSAccess.html" class="nested">Other Observer Services</a>
+                  <ul>
+                    <li><a href="/whatsup">Observing Target List</a></li>
+                    <li><a href="/iau/NatSats/NaturalSatellites.html">Natural Satellite Ephemerides</a></li>
+                    <li><a href="/iau/MPEph/NewObjEphems.html">New Object Ephemerides</a></li>
+                    <li><a href="/cgi-bin/checkmp.cgi">MPChecker</a></li>
+                    <li><a href="/cgi-bin/checkcmt.cgi">CMTChecker</a></li>
+                    <li><a href="/iau/artsats/artsats.html">Distant Artificial Satellites</a></li>
+                    <li><a href="/iau/lists/Customize.html">Observing List Customizer</a></li>
+                  </ul>
+                </li>
+                <li><a href="/db_search">Orbits/Observations Database</a></li>
+
+                <li><a href='http://alcdef.org'>Light Curve Database</a></li>
+
+                <li><a href="/iau/ECS/MPCAT-OBS/MPCAT-OBS.html">MPCAT-OBS</a></li>
+                <li><a href="/iau/SkyCoverage.html">Sky Coverage</a></li>
+                <li><a href="/iau/MPC_Documentation.html" class="nested">Documentation</a>
+                  <ul>
+                    <li><a href="/iau/info/TechInfo.html">MPC Submission Info</a></li>
+                    <li><a href="/iau/info/Astrometry.html">Astrometry Guide</a></li>
+                    <li><a href="/mpcops/documentation/artificial_satellites/">Artifical Satellites</a></li>
+                    <li><a href="/iau/WhatsNew.html">What's New</a></li>	    
+                  </ul>                
+                </li>
+                <li><a href="/iau/lists/Lists.html" class="nested">Lists and Plots</a>
+                  <ul>
+                    <li><a href="/iau/lists/MPLists.html">Minor Planets</a></li>
+                      <!--<ul>
+                        <li><a href="/iau/lists/t_atens.html">Atens</a></li>
+                        <li><a href="/iau/lists/t_apollos.html">Apollos</a></li>
+                        <li><a href="/iau/lists/t_amors.html">Amors</a></li>
+                        <li><a href="/iau/lists/t_centaurs.html">Centaurs and Scattered Disk Objects</a></li>
+                        <li><a href="/iau/lists/t_tnos.html">Transneptunian Objects</a></li>
+                        <li><a href="/iau/lists/t_others.html">Other Unusual Objects</a></li>
+                        <li><a href="/iau/lists/t_dangerous.html">Potentially Hazardous Asteroids</a></li>
+                      </ul>-->
+                    <li><a href="/iau/lists/CometLists.html">Comets</a></li>
+                      <!--<ul>
+                        <li><a href="/iau/lists/LastCometObs.html">Date of Last Observation</a></li>
+                        <li><a href="/iau/lists/LastYear.html">Designations from the Past Year</a></li>
+                        <li><a href="http://www.icq.eps.harvard.edu/CometMags.html">Comet Magnitude Estimates</a></li>
+                        <li><a href="/iau/lists/ClosestComets.html">Closest Approaches</a></li>
+                        <li><a href="/iau/lists/PeriodicCodes.html">Periodic Comets</a></li>
+                      </ul>-->
+                    <li><a href="/iau/lists/ObsCodesF.html">Observatory Codes</a></li>		    
+                    <li><a href="/iau/Animations/Animations.html">Animations</a></li>
+                  </ul>                
+                </li>
+                <li><a href="/iau/MPCStatus.html">MPC Status</a></li>
+                <!--<li><%= link_to 'Summary', :controller => 'mpc', :action => 'summary' %></li>-->
+                <li><a href='/mpc/obs_stats_2014_2018'>2014-18 NEO Obs Statistics</a></li>
+                <li><a href='/mpc/summary'>Summary of Latest Data</a></li>
+              </ul>
+            </li>
+            <li><a href="/data"><span>DATA</span></a>
+            </li>
+            <li><a href="http://iawn.net/"><span>IAWN</span></a>
+            </li>
+            <li><a href="https://minorplanetcenter.net/mpcops/beta/"><span>BETA</span></a></li>
+            <li><a href="/iau/MPCStatus.html"><span style="color:Green">STATUS</a></li>
+            <li><a href="https://sbnmpc.astro.umd.edu/"><span>SBN ANNEX</span></a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- main -->
+      <div id="main">
+
+<!-- Navigation Menu block -->
+
+<li class="yuimenuitemlabel alert"> Processing <a href="/iau/info/MPCOpStatus.html">(Info)</a></li>
+
+
+
+<!-- Main content block -->
+
+<br>
+<p>
+<h2>MPEC 2021-T62 : 2021 TB1</h2>
+The following <a href="/iau/services/MPEC.html"><i>Minor Planet Electronic
+Circular</i></a> may be linked-to from your own Web pages, but must
+<b>not</b> otherwise be <a href="/iau/WWWPolicy.html">redistributed electronically</a>.
+<p>
+A form allowing access to any <i>MPEC</i> is at
+<a href="/mpec/K19/K21T62.html#form">the bottom of this page</a>.
+<p><hr><p>
+<center>
+<a href="/mpec/K21/K21T61.html"><img src="/iau/figs/LArrow.gif" ALIGN=MIDDLE ALT=""> Read <i>MPEC</i> 2021-T61</a>
+<a href="/mpec/K21/K21T63.html"><img src="/iau/figs/RArrow.gif" ALIGN=MIDDLE ALT=""> Read <i>MPEC</i> 2021-T63</a>
+</center>
+<p><hr>
+<pre>
+<b>M.P.E.C. 2021-T62                               Issued 2021 October 4, 14:24 UT
+
+     The Minor Planet Electronic Circulars contain information on unusual
+         minor planets and routine data on comets.  They are published
+    on behalf of Division F of the International Astronomical Union by the
+          Minor Planet Center, Smithsonian Astrophysical Observatory,
+                          Cambridge, MA 02138, U.S.A.
+
+             Prepared using the Tamkin Foundation Computer Network
+
+                              MPC@CFA.HARVARD.EDU
+            URL https://www.minorplanetcenter.net/    ISSN 1523-6714
+
+                                <b>2021 TB1</b>                                 
+
+
+Observations:
+     K21T01B* C2021 10 03.20528523 17 56.75 +41 14 33.5          20.61GVET062G96
+     K21T01B  C2021 10 03.21058723 18 01.28 +41 13 47.2          20.12GVET062G96
+     K21T01B  C2021 10 03.21589623 18 05.81 +41 13 00.9          20.06GVET062G96
+     K21T01B  C2021 10 03.22119923 18 10.39 +41 12 14.7          20.30GVET062G96
+     K21T01B mC2021 10 03.31638523 19 31.36 +40 57 56.8          20.37GVET062G96
+     K21T01B mC2021 10 03.31668223 19 31.61 +40 57 54.1          20.02GVET062G96
+     K21T01B mC2021 10 03.31697823 19 31.87 +40 57 51.4          20.05GVET062G96
+     K21T01B mC2021 10 03.31727323 19 32.13 +40 57 48.7          20.13GVET062G96
+     K21T01B KC2021 10 03.78524223 27 00.07 +39 46 00.5          20.1 GVET062L01
+     K21T01B KC2021 10 03.78680023 27 01.44 +39 45 46.5          20.0 GVET062L01
+     K21T01B KC2021 10 03.78836023 27 02.76 +39 45 33.0          20.2 GVET062L01
+     K21T01B KC2021 10 03.78991823 27 04.08 +39 45 18.9          20.0 GVET062L01
+     K21T01B IC2021 10 03.79146623 27 05.37 +39 45 05.5          20.3 GVET062L01
+     K21T01B 1C2021 10 03.81937923 27 28.58 +39 40 46.3                VET062246
+     K21T01B 1C2021 10 03.81960523 27 28.75 +39 40 43.5          20   GVET062246
+     K21T01B KC2021 10 03.83991923 27 48.18 +39 37 20.8          20.5 GVET062J95
+     K21T01B KC2021 10 03.84531023 27 52.78 +39 36 33.0          19.6 GVET062J95
+     K21T01B KC2021 10 03.85368823 27 59.95 +39 35 17.7          20.2 GVET062J95
+     K21T01B KC2021 10 03.97556423 29 41.93 +39 16 31.1          20.4 GVET062Z99
+     K21T01B KC2021 10 03.98137223 29 46.81 +39 15 36.5          20.0 GVET062Z99
+     K21T01B KC2021 10 03.98719723 29 51.68 +39 14 41.3          19.8 GVET062Z99
+     K21T01B KC2021 10 04.08058123 31 26.56 +39 00 37.2          20.1 VuET062H21
+     K21T01B KC2021 10 04.08619323 31 31.22 +38 59 46.9          20.3 VuET062H21
+     K21T01B KC2021 10 04.12268023 32 05.19 +38 54 12.7          20.4 GXET062858
+     K21T01B KC2021 10 04.12683523 32 08.64 +38 53 35.4          20.4 GXET062858
+     K21T01B KC2021 10 04.13182523 32 12.72 +38 52 50.6          20.4 GXET062858
+     K21T01B KC2021 10 04.15664 23 32 30.45 +38 49 01.6          20.5 GVET062734
+     K21T01B KC2021 10 04.16528 23 32 37.49 +38 47 41.0          20.7 GVET062734
+     K21T01B KC2021 10 04.17269 23 32 43.45 +38 46 32.8          20.1 GVET062734
+
+Observer details:
+<a href="http://www.klet.org/">246 Klet Observatory-KLENOT.</a>  Observers M. Tichy, J. Ticha, M. Honkova.
+    Measurer M. Tichy.  1.06-m f/2.7 reflector + 2048x2048 CCD.
+<a href="https://nekaal.org/doku.php?id&#61;farpoint_observatory">734 Farpoint Observatory, Eskridge.</a>  Observers G. Hug, D. Cromer, D. Goodin,
+    R. Valentine.  Measurer G. Hug.  0.7-m reflector + CCD.
+858 Tebbutt Observatory, Edgewood.  Observer F. B. Zoltowski.  0.51-m Schmidt-
+    Cassegrain + CCD.
+<a href="http://www.lpl.arizona.edu/css/">G96 Mt. Lemmon Survey.</a>  Observer D. C. Fuls.  Measurers E. J. Christensen, G.
+    A. Farneth, D. C. Fuls, A. R. Gibbs, A. D. Grauer, H. Groeller, R. A.
+    Kowalski, S. M. Larson, G. J. Leonard, T. A. Pruyne, D. Rankin, R. L.
+    Seaman, F. C. Shelly, K. W. Wierzchos.  1.5-m reflector + 10K CCD.
+H21 Astronomical Research Observatory, Westfield.  Observer R. Holmes.
+    Measurers T. Linder, R. Holmes, L. Horn.  0.81-m f/4.0 astrograph + CCD.
+<a href="http://www.birtwhistle.org.uk">J95 Great Shefford.</a>  Observer P. Birtwhistle.  0.41-m f/6.3 Schmidt-Cassegrain
+    + CCD.
+L01 Visnjan Observatory, Tican.  Observer K. Korlevic.  1.0-m f/2.9 reflector
+    + CCD.
+Z99 Clixby Observatory, Cleethorpes.  Observer A. Mickleburgh.  0.36-m f/8
+    Schmidt-Cassegrain + CCD.
+
+Orbital elements:
+2021 TB1                                                 Earth MOID = 0.0431 AU
+Epoch 2021 July 5.0 TT = JDT 2459400.5                  Veres                   
+M 314.80121              (2000.0)            P               Q                  
+n   0.70078417     Peri.  140.46403     +0.95510581     +0.29225484             
+a   1.2552971      Node   202.68486     -0.29356838     +0.91152942             
+e   0.1904337      Incl.    7.23648     -0.03988114     +0.28931165             
+P   1.41           H   25.64          G   0.15           U   7                  
+Residuals in seconds of arc
+211003 G96  0.3-  0.3+    211003 L01  0.4+  0.1-    211003 Z99  0.1-  0.3+
+211003 G96  0.2-  0.1+    211003 L01  0.2+  0.4-    211004 H21  0.0   0.2-
+211003 G96  0.2-  0.2+    211003 L01  0.1-  0.1-    211004 H21  0.1+  0.0
+211003 G96  0.5+  0.4+    211003 246  0.5+  0.3+    211004 858  0.2-  0.0
+211003 G96  0.1+  0.2-    211003 246  0.3+  0.5-    211004 858  0.1+  0.0
+211003 G96  0.1+  0.2-    211003 J95  0.2-  0.3-    211004 858  0.1-  0.0
+211003 G96  0.2+  0.2-    211003 J95  0.3-  0.0     211004 734  0.2-  0.4+
+211003 G96  0.3+  0.1-    211003 J95  0.2+  0.1-    211004 734  0.5+  0.5-
+211003 L01  0.0   0.1-    211003 Z99  0.3-  0.3+    211004 734  0.3+  0.1-
+211003 L01  0.5+  0.3-    211003 Z99  0.1-  0.5+
+
+Ephemeris:
+2021 TB1                 a,e,i = 1.26, 0.19, 7                   q = 1.0162
+Date    TT    R. A. (2000) Decl.     Delta      r    Elong.  Phase     V
+2021 09 04    17 38 08.4 +47 49 43   0.09262 1.0166    92.3    82.4    23.4
+...
+2021 09 19    19 21 28.6 +53 42 17   0.06164 1.0199   102.6    74.0    22.2
+...
+2021 09 27    21 26 58.7 +52 00 54   0.04845 1.0265   118.7    59.0    21.2
+...
+2021 10 03    23 14 36.7 +41 44 17   0.04373 1.0336   138.0    40.4    20.5
+2021 10 04    23 30 05.3 +39 13 41   0.04359 1.0350   141.6    36.9    20.4
+2021 10 05    23 44 32.2 +36 34 22   0.04367 1.0364   145.3    33.3    20.3
+...
+2021 10 11    00 50 27.1 +20 03 42   0.04858 1.0457   166.4    13.0    19.9
+...
+2021 10 19    01 38 40.8 +03 47 04   0.06471 1.0605   173.8     5.8    20.3
+...
+2021 11 03    02 16 36.2 -08 56 24   0.1109  1.0942   155.8    21.8    22.1
+
+M. P. C. Staff               (C) Copyright 2021 MPC           M.P.E.C. 2021-T62
+</pre>
+<p><hr><p>
+<center>
+<a href="/mpec/K21/K21T61.html"><img src="/iau/figs/LArrow.gif" ALIGN=MIDDLE ALT=""> Read <i>MPEC</i> 2021-T61</a>
+<a href="/mpec/K21/K21T63.html"><img src="/iau/figs/RArrow.gif" ALIGN=MIDDLE ALT=""> Read <i>MPEC</i> 2021-T63</a>
+</center>
+<p><hr><p>
+<a name="form"><FORM METHOD=POST ACTION="https://www.minorplanetcenter.net/cgi-bin/displaycirc.cgi"><p>
+<input type=hidden name="S" value="M">
+<input type=hidden name="F" value="P">
+<input type=submit value=" Display "> <i>MPEC</i> number: <input name="N" maxlength=9 size=9> <input type=reset value=" Clear "><p>
+</form>
+Enter an <a href="/iau/services/MPEC.html"><i>MPEC</i></a> number in one of the following forms:
+<ul>
+<li>1997-B01 (the full form)
+<li>J97B01 (the packed version of the full form)
+<li>B01 (the abbreviated form)
+</ul>
+<!-- Body postamble -->
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer id="footer">
+    <div class="holder">
+      <nav class="nav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+	  <!-- Contact link changed to Jira -->
+          <li><a href="https://mpc-service.atlassian.net/servicedesk/customer/portals">Contact</a></li>
+          <li><a href="https://www.cfa.harvard.edu/content/privacy-statement">Privacy</a></li>
+        </ul>
+      </nav>
+      
+      <a href="https://www.cfa.harvard.edu">
+      <img src="/images/CfA_Logo_Vertical_CMYK.png" width="110" height="47"></a>
+      <p>
+      <p>
+      <p>
+      <div class="copy">The Minor Planet Center is hosted by the Center for Astrophysics | Harvard &amp; Smithsonian.<center>The Minor Planet Center is funded by NASA.</center></div> 
+  </footer>
+
+<script type="text/javascript">
+  $(window).on('load', (function() {
+    $("table").tablesorter();
+  })); 
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var _tag=new WebTrends();
+_tag.dcsGetId();
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+_tag.dcsCustom=function(){
+// Add custom parameters here.
+//_tag.DCSext.param_name=param_value;
+}
+_tag.dcsCollect();
+//]]>
+</script>
+
+<noscript>
+<div><img alt="DCSIMG" id="DCSIMG" width="1" height="1" src="//logs1.smithsonian.museum/dcsa7yzrmbdzpxzrosrn4tyep_5i1d/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=9.4.0&amp;dcssip=www.minorplanetcenter.net"/></div>
+</noscript>
+</body>
+
+</html>
