@@ -7,10 +7,7 @@
 # or: repeat(gather->parse->small stats report) and then leave compilation of those stats reports more open ended
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
-import re
-import sys
-import os
-import fileinput
+import re, sys, os, fileinput
 import pandas as pd
 # This opens, reads, cleans, and saves a webpage:
 # url = "https://www.minorplanetcenter.net/mpec/K21/K21T62.html"
