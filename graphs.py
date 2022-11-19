@@ -1,10 +1,10 @@
-import matplotlib.colors as mcolors, matplotlib.pyplot as plt, re, sys, os, fileinput, shutil
+import matplotlib.colors as mcolors, matplotlib.pyplot as plt, math, re, sys, os, fileinput, shutil, random
 import pandas as pd
 from datetime import datetime
 
 
 graphs = []
-graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M")) + '/'
+graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")) + '/'
 
 
 class GraphObj:
@@ -13,28 +13,58 @@ class GraphObj:
         self.name, self.dataframe, self.xAxis, self.yAxis, self.path = name, dataframe, xAxis, yAxis, path
     def graph(self):
         df = self.dataframe
-        tmoDf = (df.loc[(df["Obs Code"] == "654") | (df["Obs Code"] == 654)])
-        other = (df.loc[(df["Obs Code"] != "654") | (df["Obs Code"] != 654)])  # this sucks
-        plt.scatter(other[self.xAxis], other[self.yAxis], c='tab:blue')
-        plt.scatter(tmoDf[self.xAxis], tmoDf[self.yAxis], c='tab:orange')
+        codes = list(df["Obs Code"].unique())
+        colorDict = createLegend(codes)
+        fig, ax = plt.subplots()
+
+        for code in codes:
+            tempDf = df.loc[df["Obs Code"]==code]
+            ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code)
+        ax.legend(loc='upper center', ncol=5, fancybox=True, shadow=True)
         plt.title(self.name)
         plt.xlabel(self.xAxis)
         plt.ylabel(self.yAxis)
         plt.xticks([])
+        plt.tight_layout()
         plt.savefig(self.path + self.name + ".png")
         plt.clf()
 
-#are observatories coming up with different obs but same median error because
-#the error calculation associates some constant weight to each observatory, and
-#thus those observatories' error correlates to their ability to influence calculated value, and
-# observatories with the same weight come out to have similar median?
+def createLegend(keys):
+    colors = mcolors.XKCD_COLORS
+    colors = list(colors.values())
+    random.shuffle(colors)
+    colors = colors[:len(keys)]
+    return {keys[i]: colors[i] for i in range(len(keys))}
 
-#Create a list out of n random colors in mcolors.CSS4_COLORS -> this might need to be formatted as a list
-#zip() said list with the labels
-#create legend aaccording to article
+def plotMedians(codes,graphTitle):
+    global graphPath
+    medDf = pd.DataFrame(columns=["Obs Code", "Name", "Median Diagonal Error"])
+    for code in codes.keys():
+        df = current.loc[current["Obs Code"]==code]
+        lis = [code, codes[code],df["Diagonal Residual"].median()]
+        medDf.loc[len(medDf.index)] = lis
+    medDf = medDf.sort_values('Median Diagonal Error')
+    if graphTitle == "Maunakea":
+        print(medDf)
+    fig,ax = plt.subplots()
+    codes = list(medDf["Obs Code"].unique())
+    colorDict = createLegend(codes)
+    fig, ax = plt.subplots()
+    for code in codes:
+        tempDf = medDf.loc[medDf["Obs Code"] == code]
+        bar = ax.bar(tempDf["Name"], tempDf["Median Diagonal Error"], color=colorDict[code])
+        ax.bar_label(bar, size=5, labels=['{:g}'.format(float('{:.2g}'.format(i))) for i in tempDf["Median Diagonal Error"]])
+    plt.title(graphTitle)
+    plt.ylabel("Median Diagonal Error (arcseconds)")
+    plt.xticks(fontsize=5, rotation=270)
+    x,y = medDf['Name'].values.tolist(), medDf["Median Diagonal Error"].values.tolist()
+
+    # for index in range(len(bar)):
+    #     ax.text(x[index], y[index], roundToN(y[index],2), size=4)
+    plt.savefig(graphPath+"/barCharts/"+graphTitle+".png")
+    plt.clf()
 
 #2018-A27 is an example of a repeat
-
 
 #read in the file
 os.mkdir(graphPath)
@@ -42,7 +72,6 @@ os.mkdir(graphPath+"/barCharts")
 
 
 data = pd.read_csv("data3.csv")
-data = data.uni
 current = (data.loc[data['Date'].str.contains('2022')])
 tmoCurrent = (current.loc[(current["Obs Code"]=="654")])
 
@@ -54,32 +83,7 @@ tmo2022Graph = GraphObj("TMO 2022", (current.loc[(current["Obs Code"]=="654")]))
 #graph the manual graphs
 graphs = [alltimeGraph, currentGraph, alltimeTMOGraph, tmo2022Graph]
 
-def createLegend(keys):
-    colors = mcolors.CSS4_COLORS
-    print(colors)
-    colors = colors.shuffle[:len(keys)-1]
-    return {names[i]: colors[i] for i in range(len(names))}
 
-
-def plotMedians(codes,graphTitle):
-    global graphPath
-    medDf = pd.DataFrame(columns=["Obs Code", "Name", "Median Diagonal Error"])
-    for code in codes.keys():
-        df = current.loc[current["Obs Code"]==code]
-        lis = [code, codes[code],df["Diagonal Residual"].median()]
-        medDf.loc[len(medDf.index)] = lis
-    medDf = medDf.sort_values('Median Diagonal Error')
-    plt.bar(medDf['Name'],medDf["Median Diagonal Error"],label=medDf['Name'])
-    plt.title(graphTitle)
-    plt.ylabel("Median Diagonal Error (arcseconds)")
-    plt.xticks(fontsize=5, rotation=270)
-#     fig, ax = plt.subplots()
-#     scatter = ax.scatter(x, y, c=c, s=s, label=)
-# )
-#     ax.add_artist(legend1)
-    plt.legend()
-    plt.savefig(graphPath+"/barCharts/"+graphTitle+".png")
-    plt.clf()
 
 for file in os.listdir("obsCodesToPlot"):
     #read in line numbers, if Obs Code in [list]
