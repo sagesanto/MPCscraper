@@ -2,10 +2,10 @@ import matplotlib.colors as mcolors, matplotlib.pyplot as plt, re, sys, os, file
 import pandas as pd
 from datetime import datetime
 
+
 graphs = []
 graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M")) + '/'
-os.mkdir(graphPath)
-os.mkdir(graphPath+"/barCharts")
+
 
 class GraphObj:
     global graphPath
@@ -24,10 +24,25 @@ class GraphObj:
         plt.savefig(self.path + self.name + ".png")
         plt.clf()
 
+#are observatories coming up with different obs but same median error because
+#the error calculation associates some constant weight to each observatory, and
+#thus those observatories' error correlates to their ability to influence calculated value, and
+# observatories with the same weight come out to have similar median?
+
+#Create a list out of n random colors in mcolors.CSS4_COLORS -> this might need to be formatted as a list
+#zip() said list with the labels
+#create legend aaccording to article
+
+#2018-A27 is an example of a repeat
+
 
 #read in the file
-data = pd.read_csv("data3.csv")
+os.mkdir(graphPath)
+os.mkdir(graphPath+"/barCharts")
 
+
+data = pd.read_csv("data3.csv")
+data = data.uni
 current = (data.loc[data['Date'].str.contains('2022')])
 tmoCurrent = (current.loc[(current["Obs Code"]=="654")])
 
@@ -39,6 +54,13 @@ tmo2022Graph = GraphObj("TMO 2022", (current.loc[(current["Obs Code"]=="654")]))
 #graph the manual graphs
 graphs = [alltimeGraph, currentGraph, alltimeTMOGraph, tmo2022Graph]
 
+def createLegend(keys):
+    colors = mcolors.CSS4_COLORS
+    print(colors)
+    colors = colors.shuffle[:len(keys)-1]
+    return {names[i]: colors[i] for i in range(len(names))}
+
+
 def plotMedians(codes,graphTitle):
     global graphPath
     medDf = pd.DataFrame(columns=["Obs Code", "Name", "Median Diagonal Error"])
@@ -47,10 +69,15 @@ def plotMedians(codes,graphTitle):
         lis = [code, codes[code],df["Diagonal Residual"].median()]
         medDf.loc[len(medDf.index)] = lis
     medDf = medDf.sort_values('Median Diagonal Error')
-    plt.bar(medDf['Name'],medDf["Median Diagonal Error"])
+    plt.bar(medDf['Name'],medDf["Median Diagonal Error"],label=medDf['Name'])
     plt.title(graphTitle)
     plt.ylabel("Median Diagonal Error (arcseconds)")
     plt.xticks(fontsize=5, rotation=270)
+#     fig, ax = plt.subplots()
+#     scatter = ax.scatter(x, y, c=c, s=s, label=)
+# )
+#     ax.add_artist(legend1)
+    plt.legend()
     plt.savefig(graphPath+"/barCharts/"+graphTitle+".png")
     plt.clf()
 
