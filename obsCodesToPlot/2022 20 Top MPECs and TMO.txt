@@ -1,21 +1,21 @@
-I52, Stew Mt. Lem
-F52, Pn-STRS 2
+I52, Steward Mt. Lem.
+F52, Pan-STARRS 2
 G96, Mt. Lem Survey
 H21, ARO Westf.
 807, Cerro Tololo
-F51, Pn-STRS 1
+F51, Pan-STARRS 1
 L01, Visnjan
 33, Karl S.
 568, Maunakea
-I93, St Pardon
+I93, St. Pardon
 J95, Great Shefford
-703, Catalina
+703, Catalina Survey
 C95, SATINO
-958, Obs de Dax
+958, Obs. de Dax
 204, Schiaparelli
 104, San Marcello
 T08, ATLAS-MLO
-H36, Sandlot
+H36, Sandlot Obs.
 V06, Catalina Kuiper
 T05, ATLAS-HKO
 654, TMO
