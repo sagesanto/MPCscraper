@@ -61,7 +61,7 @@ def expandPath(workingDir, returner):
 
 df = pd.DataFrame(columns=['Date','Bulletin', 'Obs Code', 'Residual RA', 'Residual Dec'])
 
-dir = "../src/bulletins2Bad/autoTMO/"
+dir = "../src/useBulletins/autoTMO/22"
 dirList = list(filter(lambda p: ".txt" in p, expandPath(dir, [])))
 for file in dirList:
     with open(file,'r') as f:
@@ -81,7 +81,7 @@ for file in dirList:
     else:
         print("Oops - no residuals for " + file)
 print(df)
-df.to_csv("../src/TMO_Bulletins.csv", index=False)
+df.to_csv("../src/revisedTMO_Bulletins.csv", index=False)
 # except Exception as e:
 #     df.to_csv("../src/stats.csv", index=False)
 #     print("Oops! Exception! Saving df. Exception: ",e)

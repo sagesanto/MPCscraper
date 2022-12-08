@@ -2,12 +2,12 @@ import matplotlib.colors as mcolors, matplotlib.pyplot as plt, math, re, sys, os
 import pandas as pd
 from datetime import datetime
 
-raw = pd.read_csv("TMO_Bulletins.csv")
+raw = pd.read_csv("revisedTMO_Bulletins.csv")
 
 raw['Diagonal Residual'] = (raw["Residual RA"]**2+raw["Residual Dec"]**2)**(1/2)
 
 print(raw)
-raw.to_csv("diagonalTMO_Bulletins.csv")
+raw.to_csv("diagonalRevisedTMO_Bulletins.csv")
 # def sortOut(row,dataFrame):
 #     date = row["Date"]
 #     print(date)

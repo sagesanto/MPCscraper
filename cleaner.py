@@ -18,7 +18,7 @@ def expandPath(workingDir, returner):
             returner = expandPath(workingDir + "/" + item, returner)
         return returner
 
-dir = "../src/bulletins2"
+dir = "../src/useBulletins/autoTMO/22"
 dirList = list(filter(lambda p: ".txt" in p, expandPath(dir, [])))
 for filename in dirList:
     with open(filename,'r') as f:
