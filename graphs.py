@@ -1,5 +1,6 @@
-import matplotlib.colors as mcolors, matplotlib.pyplot as plt, math, re, sys, os, fileinput, shutil, random
+import matplotlib.colors as mcolors, matplotlib.pyplot as plt, math, re, sys, os, fileinput, shutil, random, numpy as np
 import pandas as pd
+from pandas_profiling import ProfileReport
 from datetime import datetime
 
 
@@ -7,6 +8,7 @@ graphs = []
 graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")) + '/'
 #initialize colors
 # colors = [line.replace("\n",'') for line in open("colors.txt")]
+
 class GraphObj:
     global graphPath
     def __init__(self,name,dataframe,xAxis="Date",yAxis="Diagonal Residual",path=graphPath):
@@ -37,6 +39,14 @@ def createLegend(keys):
     dict = {keys[i]: colors[i] for i in range(len(keys))}
     dict["654"] = "#FFAB00"
     return dict
+
+#     global colors
+#     return {keys[i]: colors[i] for i in range(len(keys))}
+# #for tmo only
+#     colors = ["#0606A0"]*len(keys)
+#     dict = {keys[i]: colors[i] for i in range(len(keys))}
+#     dict["654"] = "#FFAB00"
+#     return dict
 
 def plotMedians(codes,graphTitle):
     global graphPath
@@ -78,8 +88,13 @@ with open("repeatBulList.txt",'r') as f:
         line = line.replace('\n', '')
         repeats.append(line)
 
+
 data = pd.read_csv("diagonalTMO_Bulletins.csv")
+data = data[~data["Bulletin"].isin(repeats)]
 current = (data.loc[data['Date'].str.contains('2022')])
+
+print(data)
+
 # print("data has\n",(data.nunique()))
 # print("\n\n\n",data["Bulletin"].value_counts())
 
@@ -122,10 +137,10 @@ current = (data.loc[data['Date'].str.contains('2022')])
 #create mask
 
 # orbitUpdate2022 = orbitUpdate.loc[orbitUpdate['Date'].str.contains('2022')]
-obsWithTMOalltimeGraph = GraphObj("Alltime Observations on TMO Bulletins",data)
-obsWithTMO2022 = GraphObj("2022 Observations on TMO Bulletins", current)
-#
-graphs = [obsWithTMOalltimeGraph,obsWithTMO2022]
+# obsWithTMOalltimeGraph = GraphObj("Alltime Observations on TMO Bulletins",data)
+# obsWithTMO2022 = GraphObj("2022 Observations on TMO Bulletins", current)
+# #
+# graphs = [obsWithTMOalltimeGraph,obsWithTMO2022]
 
 
 for file in os.listdir("obsCodesToPlot"):
@@ -137,8 +152,12 @@ for file in os.listdir("obsCodesToPlot"):
             split = line.split(", ")
             codes[split[0]] = split[1]
     currentDf = current.loc[current["Obs Code"].isin(codes)]
+    profile = ProfileReport(currentDf, title="Profile of 2022 Observations by Top Follow Ups from Bulletins that Include TMO")
+    profile.to_file("report"+file.replace('.txt','') + ".html")
+    currentDf.to_csv("csvs/"+file.replace('.txt','')+".csv")
     plotMedians(codes,file[:-4])
     graphs.append(GraphObj(file[:-4], currentDf))
 
 for graph in graphs:
     graph.graph()
+
