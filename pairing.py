@@ -4,10 +4,10 @@ from datetime import datetime
 
 raw = pd.read_csv("TMO_Bulletins.csv")
 
-raw['Diagonal Residual'] = (raw["Residual RA"]**2+raw["Residual Dec"]**2)**1/2
+raw['Diagonal Residual'] = (raw["Residual RA"]**2+raw["Residual Dec"]**2)**(1/2)
 
 print(raw)
-raw.to_csv("doctoredTMO_Bulletins.csv")
+raw.to_csv("diagonalTMO_Bulletins.csv")
 # def sortOut(row,dataFrame):
 #     date = row["Date"]
 #     print(date)

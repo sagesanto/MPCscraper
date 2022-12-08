@@ -6,8 +6,7 @@ from datetime import datetime
 graphs = []
 graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")) + '/'
 #initialize colors
-# colors = [line for line in open("colors.txt")]
-
+# colors = [line.replace("\n",'') for line in open("colors.txt")]
 class GraphObj:
     global graphPath
     def __init__(self,name,dataframe,xAxis="Date",yAxis="Diagonal Residual",path=graphPath):
@@ -30,9 +29,9 @@ class GraphObj:
         plt.clf()
 
 def createLegend(keys):
-#for gradient
-    #global colors
-    # return {keys[i]: colors[i] for i in range(len(keys))}
+# for gradient
+#     global colors
+#     return {keys[i]: colors[i] for i in range(len(keys))}
 #for tmo only
     colors = ["#0606A0"]*len(keys)
     dict = {keys[i]: colors[i] for i in range(len(keys))}
@@ -79,7 +78,7 @@ with open("repeatBulList.txt",'r') as f:
         line = line.replace('\n', '')
         repeats.append(line)
 
-data = pd.read_csv("doctoredTMO_Bulletins.csv")
+data = pd.read_csv("diagonalTMO_Bulletins.csv")
 current = (data.loc[data['Date'].str.contains('2022')])
 # print("data has\n",(data.nunique()))
 # print("\n\n\n",data["Bulletin"].value_counts())
