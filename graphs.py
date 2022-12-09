@@ -27,12 +27,13 @@ class GraphObj:
             tempDf = df.loc[df["Obs Code"]==code]
             ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code)
         # ax.legend(loc='upper center', ncol=5, fancybox=True, shadow=True)
-        plt.title(self.name)
+        plt.title(self.name+" "+self.yAxis)
         plt.xlabel(self.xAxis)
         plt.ylabel(self.yAxis)
+        plt.ylim(0,2)
         plt.xticks([])
         plt.tight_layout()
-        plt.savefig(self.path + self.name + ".png")
+        plt.savefig(self.path + self.name +" "+self.yAxis +".png")
         plt.clf()
 
 def createLegend(keys):
@@ -110,7 +111,8 @@ for file in os.listdir("obsCodesToPlot"):
     # profile.to_file("report"+file.replace('.txt','') + ".html")
     currentDf.to_csv("csvs/"+file.replace('.txt','')+".csv")
     plotMedians(codes,file[:-4])
-    graphs.append(GraphObj(file[:-4], currentDf))
+    graphs.append(GraphObj(file[:-4], currentDf,yAxis="Residual RA"))
+    graphs.append(GraphObj(file[:-4], currentDf,yAxis="Residual Dec"))
 
 for graph in graphs:
     graph.graph()
