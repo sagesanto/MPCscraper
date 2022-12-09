@@ -3,41 +3,50 @@ import pandas as pd
 # from pandas_profiling import ProfileReport
 from datetime import datetime
 
+# 1) tiny dots for the blue points
+# 2) tiny x’s for our points
+# 3) zoomed into -0.10-2.5” residuals
+
+show = False
 useColors = False
 graphs = []
+plots = []
 graphPath = "graphs/" + str(datetime.strftime(datetime.now(), "%Y-%m-%d-%H-%M-%S")) + '/'
 #initialize colors
 if useColors:
     colors = [line.replace("\n",'') for line in open("colors.txt")]
 
 class GraphObj:
-    global graphPath
     def __init__(self,name,dataframe,xAxis="Date",yAxis="Diagonal Residual",path=graphPath):
         self.name, self.dataframe, self.xAxis, self.yAxis, self.path = name, dataframe, xAxis, yAxis, path
     def graph(self):
+        global graphPath
         df = self.dataframe
         codes = list(df["Obs Code"].unique())
-        #move TMO to the back so it hopefully gets graphed over everything else
+        #move TMO to the back so it hopefully gets graphed over everything else:
         if "654" in codes:
             codes.remove("654")
             codes.append("654")
         colorDict = createLegend(codes)
         fig, ax = plt.subplots()
         for code in codes:
+            mark = 'x' if code=="654" else 'o'
+            markerSize = 9 if code=="654" else 1
             tempDf = df.loc[df["Obs Code"]==code]
-            ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code)
+            ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code, s=markerSize, marker=mark)
         # ax.legend(loc='upper center', ncol=5, fancybox=True, shadow=True)
         plt.title(self.name+" "+self.yAxis)
         plt.xlabel(self.xAxis)
         plt.ylabel(self.yAxis)
-        plt.ylim(0,2)
+        plt.ylim(-0.1,2.5)
         plt.xticks([])
         plt.tight_layout()
         plt.savefig(self.path + self.name +" "+self.yAxis +".png")
+        if show:
+            plt.show()
         plt.clf()
 
 def createLegend(keys):
-
     global useColors
     # for gradient
     if useColors:
@@ -51,9 +60,8 @@ def createLegend(keys):
 
 
 def plotMedians(codes,graphTitle):
-    global graphPath
+    global show
     calcDf = pd.DataFrame(columns=["Obs Code", "Name", "Median Diagonal Error","Average Diagonal Error"])
-    
     for code in codes.keys():
         df = current.loc[current["Obs Code"]==code]
         lis = [code, codes[code],df["Diagonal Residual"].median(),df["Diagonal Residual"].mean()]
@@ -65,7 +73,6 @@ def plotMedians(codes,graphTitle):
         codes = list(calcDf["Obs Code"].unique())
         colorDict = createLegend(codes)
         fig.set_size_inches(18.5, 10.5)
-        fig, ax = plt.subplots()
         for code in codes:
             tempDf = calcDf.loc[calcDf["Obs Code"] == code]
             bar = ax.bar(tempDf["Name"], tempDf[column], color=colorDict[code],label=code)
@@ -79,7 +86,7 @@ def plotMedians(codes,graphTitle):
         plt.clf()
         plt.close()
 
- repeats = []
+repeats = []
 #read in the file
 os.mkdir(graphPath)
 os.mkdir(graphPath+"/barCharts")
@@ -111,9 +118,9 @@ for file in os.listdir("obsCodesToPlot"):
     # profile.to_file("report"+file.replace('.txt','') + ".html")
     currentDf.to_csv("csvs/"+file.replace('.txt','')+".csv")
     plotMedians(codes,file[:-4])
-    graphs.append(GraphObj(file[:-4], currentDf,yAxis="Residual RA"))
-    graphs.append(GraphObj(file[:-4], currentDf,yAxis="Residual Dec"))
+    graphs.append(GraphObj(file[:-4], currentDf))
 
 for graph in graphs:
     graph.graph()
 
+os.startfile(os.path.normpath(graphPath))
