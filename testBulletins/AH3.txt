@@ -1,0 +1,104 @@
+M.P.E.C. 2022-A173                             Issued 2022 January 13, 11:39 UT
+
+     The Minor Planet Electronic Circulars contain information on unusual
+         minor planets and routine data on comets.  They are published
+    on behalf of Division F of the International Astronomical Union by the
+          Minor Planet Center, Smithsonian Astrophysical Observatory,
+                          Cambridge, MA 02138, U.S.A.
+
+             Prepared using the Tamkin Foundation Computer Network
+
+                              MPC@CFA.HARVARD.EDU
+            URL https://www.minorplanetcenter.net/    ISSN 1523-6714
+
+                                2022 AG6                                 Observations:
+     K22A06G* C2022 01 10.08626004 16 11.87 +39 16 19.9          20.91GVEA173G96
+     K22A06G  C2022 01 10.09198104 16 13.05 +39 16 33.3          20.49GVEA173G96
+     K22A06G  C2022 01 10.09889004 16 14.50 +39 16 48.2                VEA173G96
+     K22A06G  C2022 01 10.10458904 16 15.63 +39 17 01.7          20.74GVEA173G96
+     K22A06G mC2022 01 10.21568404 16 37.31 +39 20 46.9                VEA173I52
+     K22A06G mC2022 01 10.21804604 16 37.82 +39 20 51.0                VEA173I52
+     K22A06G mC2022 01 10.21880104 16 37.96 +39 20 52.7          21.03GVEA173I52
+     K22A06G KC2022 01 12.08265504 26 55.76 +40 24 20.9          20.75GVEA173G96
+     K22A06G KC2022 01 12.08652704 26 56.82 +40 24 31.2          20.83GVEA173G96
+     K22A06G KC2022 01 12.09039604 26 57.95 +40 24 40.7          20.69GVEA173G96
+     K22A06G KC2022 01 12.09488404 26 59.18 +40 24 52.1          20.77GVEA173G96
+     K22A06G  C2022 01 12.19923104 27 29.60 +40 28 49.7          20.6 GVEA173654
+     K22A06G  C2022 01 12.21107604 27 32.85 +40 29 15.3          20.6 GVEA173654
+     K22A06G  C2022 01 12.25856404 27 45.96 +40 30 51.9          21.1 GVEA173654
+     K22A06G  C2022 01 12.27042704 27 49.29 +40 31 14.2          21.1 GVEA173654
+     K22A06G KC2022 01 12.89283204 31 56.15 +40 53 36.7          21.0 GVEA173L06
+     K22A06G KC2022 01 12.89353504 31 56.38 +40 53 37.5          20.8 GVEA173L06
+     K22A06G KC2022 01 13.08676004 33 28.37 +41 01 24.2          21.0 GXEA173858
+     K22A06G KC2022 01 13.09967404 33 32.58 +41 01 57.9          21.1 GXEA173858
+     K22A06G KC2022 01 13.11262804 33 36.77 +41 02 32.0          21.2 GXEA173858
+
+Observer details:
+654 Table Mountain Observatory, Wrightwood-PHMC.  Observers N. Evans, P. Choi,
+    N. Saini, C. Zhai, R. Trahan, M. Shao.  1.0-m reflector + CCD.
+858 Tebbutt Observatory, Edgewood.  Observer F. B. Zoltowski.  0.51-m Schmidt-
+    Cassegrain + CCD.
+G96 Mt. Lemmon Survey.  Observer G. J. Leonard.  Measurers E. J. Christensen,
+    G. A. Farneth, D. C. Fuls, A. R. Gibbs, A. D. Grauer, H. Groeller, R. A.
+    Kowalski, S. M. Larson, G. J. Leonard, D. Rankin, R. L. Seaman, A.
+    Serrano, F. C. Shelly, K. W. Wierzchos.  1.5-m reflector + 10K CCD.
+I52 Steward Observatory, Mt. Lemmon Station.  Observer K. W. Wierzchos.
+    Measurers E. J. Christensen, G. A. Farneth, D. C. Fuls, A. R. Gibbs, A. D.
+    Grauer, H. Groeller, R. A. Kowalski, S. M. Larson, G. J. Leonard, D.
+    Rankin, R. L. Seaman, A. Serrano, F. C. Shelly, K. W. Wierzchos.
+L06 Sormano 2 Observatory, Bellagio Via Lattea.  Observer G. Ventre.  Measurer
+    P. Sicoli.  0.36-m Schmidt-Cassegrain + CCD.
+
+Orbital elements:
+2022 AG6                                                 Earth MOID = 0.0191 AU
+Epoch 2022 Jan. 21.0 TT = JDT 2459600.5                 Veres                   
+M 356.15137              (2000.0)            P               Q                  
+n   0.58095189     Peri.  159.68277     -0.60691006     -0.79469368             
+a   1.4224683      Node   327.68078     +0.72630304     -0.54892662             
+e   0.2949801      Incl.    1.18442     +0.32271361     -0.25911681             
+P   1.70           H   26.41          G   0.15           U   7                  
+Residuals in seconds of arc
+220110 G96  0.2-  0.0     220112 G96  0.3+  0.1+    220112 654  0.2-  0.1-
+220110 G96  0.2-  0.2+    220112 G96  0.2-  0.3+    220112 L06  0.7+  0.0
+220110 G96  0.3+  0.6-    220112 G96  0.1+  0.2-    220112 L06  0.7+  0.6-
+220110 G96  0.1+  0.1+    220112 G96  0.3-  0.3-    220113 858  0.1-  0.3-
+220110 I52  0.4-  0.0     220112 654  0.0   0.1+    220113 858  0.6-  0.7-
+220110 I52  0.1+  0.1-    220112 654  0.1+  0.1+    220113 858  0.9-  0.1-
+220110 I52  0.0   0.2+    220112 654  0.0   0.1+
+
+Ephemeris:
+2022 AG6                 a,e,i = 1.42, 0.29, 1                   q = 1.0029
+Date    TT    R. A. (2000) Decl.     Delta      r    Elong.  Phase     V
+2021 12 14    03 49 51.6 +31 41 43   0.1047  1.0818   157.4    20.5    22.7
+...
+2021 12 29    03 48 38.3 +34 40 19   0.06903 1.0393   142.9    34.8    22.1
+...
+2022 01 06    04 01 16.3 +37 20 02   0.05231 1.0226   137.7    40.3    21.6
+...
+2022 01 12    04 26 15.7 +40 21 13   0.04058 1.0133   136.6    41.9    21.1
+2022 01 13    04 32 43.3 +40 57 59   0.03870 1.0120   136.7    41.8    21.0
+2022 01 14    04 40 06.9 +41 36 32   0.03686 1.0108   137.0    41.5    20.9
+...
+2022 01 20    05 54 16.4 +45 31 39   0.02675 1.0054   142.8    36.2    20.0
+...
+2022 01 28    09 23 59.1 +37 48 42   0.01939 1.0028   158.3    21.3    18.9
+...
+2022 02 12    12 36 06.1 -02 04 00   0.03647 1.0126   133.8    44.7    21.0
+
+M. P. C. Staff               (C) Copyright 2022 MPC           M.P.E.C. 2022-A173
+ Read MPEC 2022-A172
+ Read MPEC 2022-A174 MPEC number:  
+
+Enter an MPEC number in one of the following forms:
+
+1997-B01 (the full form)
+J97B01 (the packed version of the full form)
+B01 (the abbreviated form)
+
+Home
+About
+
+Contact
+Privacy
+
+The Minor Planet Center is hosted by the Center for Astrophysics | Harvard & Smithsonian.The Minor Planet Center is funded by NASA.

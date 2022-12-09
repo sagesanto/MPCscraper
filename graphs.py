@@ -78,17 +78,10 @@ def plotMedians(codes,graphTitle):
         plt.clf()
         plt.close()
 
+ repeats = []
 #read in the file
 os.mkdir(graphPath)
 os.mkdir(graphPath+"/barCharts")
-
-
-repeats = []
-# with open("repeatBulList.txt",'r') as f:
-#     for line in f:
-#         line = line.replace('\n', '')
-#         repeats.append(line)
-
 
 data = pd.read_csv("diagonalRevisedTMO_Bulletins.csv")
 data = data[~data["Bulletin"].isin(repeats)]

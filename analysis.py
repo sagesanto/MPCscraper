@@ -1,8 +1,16 @@
-#assume "bulletins" is a directory of text files of scraped bulletins
 import re, sys, os, fileinput, shutil
 import pandas as pd
+from random import shuffle
 
 dateDict = ["Jan","Feb", "Mar", "Apr", "May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+def is_sorted(data):
+    return all(a <= b for a, b in zip(data, data[1:]))
+
+def bogosort(data):
+    while not is_sorted(data):
+        shuffle(data)
+    return data
 
 def regExSearch(start,end,string):
     returner = re.search(start+"(?s).*?"+end, string)
@@ -10,7 +18,6 @@ def regExSearch(start,end,string):
         return returner.group()
     else:
         return None
-
 
 def datefinder(text):
     date = regExSearch("Issued ",",",text)
@@ -48,6 +55,29 @@ def residuals(lines):
     except Exception as e:
         print(e)
         return []
+
+#the data we have right now is gathered from reading across a three-column row. sort it into being in the original vertical order
+def reorderDataframe(dataframe):
+    newDf = pd.DataFrame(columns=dataframe.columns.values.tolist())
+    for i in range(3):
+        for j in range(int(len(dataframe.index) / 3)):
+            if ((3 * j + i) <= len(dataframe.index) - 1):
+                newDf.loc[len(newDf.index)] = dataframe.iloc[3 * j + i]
+    return newDf
+
+#this is just another (perhaps more readable) way to do what reorderDataframe does
+def reorderBySort(dataframe):
+    excess = 3 - (len(dataframe.index) % 3)
+    length = int(len(dataframe.index) / 3) + 1
+    list = []
+    for i in range(length):
+        for j in range(3):
+            list.append(i + j * length + 1)
+    for n in range(excess):
+        list.remove(max(list))
+    dataframe['Num'] = list
+    return dataframe.sort_values(by='Num')
+
 
 # recursively gather a list of the paths of the files in our subdirectories
 def expandPath(workingDir, returner):
