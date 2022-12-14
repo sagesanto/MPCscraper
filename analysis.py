@@ -54,8 +54,7 @@ def magnitudes(lines):
 
 
 def residuals(lines):
-    residual = regExSearch("(?<=Residuals in seconds of arc\n)", "(?=\n(\n| ))",
-                           lines)  # check and see if provided observer code is in the bulletin's observer section, if an observer section exists
+    residual = regExSearch("(?<=Residuals in seconds of arc\n)", "(?=\n(\n| ))",lines)  # check and see if provided observer code is in the bulletin's observer section, if an observer section exists
     if not residual:
         return None
     residual = (residual.replace("(", " ")).replace(")", " ")
@@ -70,13 +69,7 @@ def residuals(lines):
         interDf = pd.DataFrame(obs, columns=['Date', 'Code', 'Res RA', 'Res Dec'])
         interDf['Res RA'], interDf['Res Dec'] = interDf['Res RA'].apply(lambda x: float(x[:-1])), interDf[
             'Res Dec'].apply(lambda x: float(x[:-1]))
-        # returner = ((interDf.to_numpy()).tolist())
         return interDf
-        # return [interDf['Code'],interDf['Res RA'], interDf['Res Dec']]
-        # tmo, other = interDf.loc[interDf['Code']=="654"], interDf.loc[interDf['Code']!=654] #horrible
-        # tmoAvRA, tmoAvDec = tmo['Res RA'].mean(), tmo['Res Dec'].mean()
-        # otherAvRA, otherAvDec = other['Res RA'].mean(), other['Res Dec'].mean()
-        # return [tmoAvRA, tmoAvDec, otherAvRA, otherAvDec]
     except Exception as e:
         print(e)
         return []
@@ -84,24 +77,33 @@ def residuals(lines):
 
 # the data we have right now is gathered from reading across a three-column row. sort it into being in the original vertical order
 def reorderDataframe(dataframe):
+    print("Input df length:",len(dataframe.index))
     newDf = pd.DataFrame(columns=dataframe.columns.values.tolist())
     for i in range(3):
-        for j in range(int(len(dataframe.index) / 3)):
-            if ((3 * j + i) <= len(dataframe.index) - 1):
+        for j in range(int(len(dataframe.index) / 3+1)):
+            if ((3 * j + i) <= len(dataframe.index) -1):
                 newDf.loc[len(newDf.index)] = dataframe.iloc[3 * j + i]
+    print("Output df length:",len(newDf.index))
     return newDf
 
 
 # this is just another (perhaps more readable) way to do what reorderDataframe does
 def reorderBySort(dataframe):
     excess = 3 - (len(dataframe.index) % 3)
+    print("Excess:",excess)
     length = int(len(dataframe.index) / 3) + 1
+    print("Length:",length)
     list = []
     for i in range(length):
         for j in range(3):
             list.append(i + j * length + 1)
+    print("numList before excess:",list)
+    origLen = len(list)
     for n in range(excess):
-        list.remove(max(list))
+        print("Removing index", len(list)-1)
+        print("Removing",list[len(list)-1],"From numList")
+        list.remove(list[len(list)-1])
+    print("numList after excess:",list,'\n')
     dataframe['Num'] = list
     return dataframe.sort_values(by='Num')
 
@@ -117,9 +119,9 @@ def expandPath(workingDir, returner):
         return returner
 
 
-df = pd.DataFrame(columns=['Date', 'Bulletin', 'Obs Code', 'Residual RA', 'Residual Dec','Num','Magnitude','Magnitude Obs Code'])
-
-dir = "../MPCscraper/testBulletins/"
+df = pd.DataFrame(columns=['Date', 'Bulletin', 'Obs Code', 'Residual RA', 'Residual Dec' ,'Num','Magnitude','Magnitude Obs Code'])
+issuesDict= {}
+dir = "../src/useBulletins/autoTMO/22/"
 dirList = list(filter(lambda p: ".txt" in p, expandPath(dir, [])))
 for file in dirList:
     with open(file, 'r') as f:
@@ -128,22 +130,38 @@ for file in dirList:
     date = datefinder(text[0])
     num = text[0][9:18]  # cringe hardcode
     toInsert = [date, num]
-    res = reorderBySort(residuals(lines))
-    magsDf = magnitudes(lines)
-    res['Magnitude'], res['Magnitude Obs Code'] = magsDf['Magnitude'].values, magsDf['Obs Code'].values
-    res = ((res.to_numpy()).tolist())
-    if res:
-        for list in res:
+    oRes = residuals(lines)
+    if oRes is not None:
+        res = reorderBySort(oRes)
+        magsDf = magnitudes(lines)
+        try:
+            res['Magnitude'], res['Magnitude Obs Code'] = magsDf['Magnitude'].values, magsDf['Obs Code'].values
+        except Exception as E:
+            issuesDict[file] = E
+            res['Magnitude'], res['Magnitude Obs Code'] = magsDf['Magnitude'].values[:len(res.index)], magsDf['Obs Code'].values[:len(res.index)]
+
+        resList = ((res.to_numpy()).tolist())
+        for list in resList:
             try:
                 df.loc[len(df.index)] = (toInsert + list[1:])
+                if False in (df['Obs Code'] == df['Magnitude Obs Code']).values:
+                    df['Obs Code Agreement'] = (df['Obs Code'] == df['Magnitude Obs Code']).values
+                    print("Mismatch on bulletin", file, "dumping df and exiting")
+                    df.to_csv("../src/failedMagsTMO_Bulletins.csv", index=False)
+                    print(resList)
+                    print(res.to_string(),'\n')
+                    print("Original Res:",oRes.to_string())
+                    print(magsDf.to_string())
+                    exit()
             except Exception as e:
                 print("Failed to insert ", toInsert + list, ", got ", e)
+
         print("Completed " + file)
     else:
         print("Oops - no residuals for " + file)
 df['Obs Code Agreement'] = (df['Obs Code'] == df['Magnitude Obs Code']).values
-print("df:", df)
-df.to_csv("../MPCscraper/magsTMO_Bulletins.csv", index=False)
+df.to_csv("../src/magsTMO_Bulletins.csv", index=False)
+print("Completed with the following issues:",issuesDict)
 # except Exception as e:
 #     df.to_csv("../src/stats.csv", index=False)
 #     print("Oops! Exception! Saving df. Exception: ",e)
