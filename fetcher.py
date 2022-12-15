@@ -7,15 +7,9 @@
 # this script downloads and cleans every MPEC bulletin in a specified date range.
 
 from bs4 import BeautifulSoup as bs
-import urllib
+import urllib, re, sys, os, fileinput, pandas as pd, random, time
 from urllib.request import urlopen
-import re
-import sys
-import os
-import fileinput
-import pandas as pd
-import random
-import time
+
 
 failures = []
 # check and see if a bulletin exists at a given URL. if it does, return the cleaned text. otherwise, return ''
@@ -35,14 +29,14 @@ def tryUrl(url):
                 return ''
 
             print("HTTP EXCEPTION WITH " + url + ": " + e.code)
-            time.sleep(1) #check if disconnected, retry twice
+            time.sleep(0.5) #check if disconnected, retry twice
             count += 1
             if count >= 3:
                 failures.append(url)
                 return ''
         except Exception as e: #check if disconnected, retry twice
             print("EXCEPTION WITH " + url + ": " + e)
-            time.sleep(1)
+            time.sleep(0.5)
             count += 1
             if count >= 3:
                 failures.append(url)
@@ -57,7 +51,7 @@ def recordLimit(year, c, ext, dataFrame):
 
 
 def dirtyWork(year, c, ext, limitsDf, path,obsDf):
-    time.sleep((random.randint(1, 10))/100) #no ddos please and thank you
+    time.sleep((random.randint(1, 3))/100) #no ddos please and thank you
     url = "https://www.minorplanetcenter.net/mpec/K" + year + "/K" + year + ext + ".html"
     text = tryUrl(url)
     if text == '':
@@ -97,7 +91,7 @@ endYear = sys.argv[3]
 
 
 # setup
-path = "../src/bulletins2" #changed to 2 because im running it again -_-
+path = "../src/12_14_22_Bulletins" #changed to 2 because im running it again -_-
 if not os.path.exists(path):
     os.mkdir(path)
     os.mkdir(path+"/autoTMO")
@@ -106,10 +100,10 @@ if not os.path.exists(path):
 obsDf = pd.DataFrame(columns=['URL'])
 limitsDf = pd.DataFrame(columns=['Year','Letter','Max'])
 years = []
-for i in range(int(startYear)-1,int(endYear)):
-    years.append(i+1) # god i hope this works it makes sense in my head (range excludes the last year, includes the first
+for i in range(int(startYear),int(endYear)+1):
+    years.append(i) # god i hope this works it makes sense in my head (range excludes the last year, includes the first
 print(years)
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWWXYZ"
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWWXYZ" #ew
 
 # loop over each year and fetch each bulletin (which may or may not exist) corresponding to an extension code
 for year in years:

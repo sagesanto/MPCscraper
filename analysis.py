@@ -26,8 +26,8 @@ def regExSearch(start, end, string):
 def datefinder(text):
     date = regExSearch("Issued ", ",", text)
     if date is None:
-        print("Oops, couldn't find a date!")
-        print(text)
+        # print("Oops, couldn't find a date!")
+        # print(text)
         return ''
     dateComps = date.split(' ')[1:]
     month = str(dateDict.index(dateComps[1][:3]) + 1)
@@ -71,39 +71,39 @@ def residuals(lines):
             'Res Dec'].apply(lambda x: float(x[:-1]))
         return interDf
     except Exception as e:
-        print(e)
+        # print(e)
         return []
 
 
 # the data we have right now is gathered from reading across a three-column row. sort it into being in the original vertical order
 def reorderDataframe(dataframe):
-    print("Input df length:",len(dataframe.index))
+    # # print("Input df length:",len(dataframe.index))
     newDf = pd.DataFrame(columns=dataframe.columns.values.tolist())
     for i in range(3):
         for j in range(int(len(dataframe.index) / 3+1)):
             if ((3 * j + i) <= len(dataframe.index) -1):
                 newDf.loc[len(newDf.index)] = dataframe.iloc[3 * j + i]
-    print("Output df length:",len(newDf.index))
+    # # print("Output df length:",len(newDf.index))
     return newDf
 
 
 # this is just another (perhaps more readable) way to do what reorderDataframe does
 def reorderBySort(dataframe):
     excess = 3 - (len(dataframe.index) % 3)
-    print("Excess:",excess)
+    # # print("Excess:",excess)
     length = int(len(dataframe.index) / 3) + 1
-    print("Length:",length)
+    # # print("Length:",length)
     list = []
     for i in range(length):
         for j in range(3):
             list.append(i + j * length + 1)
-    print("numList before excess:",list)
+    # # print("numList before excess:",list)
     origLen = len(list)
     for n in range(excess):
-        print("Removing index", len(list)-1)
-        print("Removing",list[len(list)-1],"From numList")
+        # # print("Removing index", len(list)-1)
+        # # print("Removing",list[len(list)-1],"From numList")
         list.remove(list[len(list)-1])
-    print("numList after excess:",list,'\n')
+    # # print("numList after excess:",list,'\n')
     dataframe['Num'] = list
     return dataframe.sort_values(by='Num')
 
@@ -121,7 +121,7 @@ def expandPath(workingDir, returner):
 
 df = pd.DataFrame(columns=['Date', 'Bulletin', 'Obs Code', 'Residual RA', 'Residual Dec' ,'Num','Magnitude','Magnitude Obs Code'])
 issuesDict= {}
-dir = "../src/useBulletins/autoTMO/22/"
+dir = "../src/12_14_22_Bulletins/autoTMO/22/"
 dirList = list(filter(lambda p: ".txt" in p, expandPath(dir, [])))
 for file in dirList:
     with open(file, 'r') as f:
@@ -144,15 +144,6 @@ for file in dirList:
         for list in resList:
             try:
                 df.loc[len(df.index)] = (toInsert + list[1:])
-                if False in (df['Obs Code'] == df['Magnitude Obs Code']).values:
-                    df['Obs Code Agreement'] = (df['Obs Code'] == df['Magnitude Obs Code']).values
-                    print("Mismatch on bulletin", file, "dumping df and exiting")
-                    df.to_csv("../src/failedMagsTMO_Bulletins.csv", index=False)
-                    print(resList)
-                    print(res.to_string(),'\n')
-                    print("Original Res:",oRes.to_string())
-                    print(magsDf.to_string())
-                    exit()
             except Exception as e:
                 print("Failed to insert ", toInsert + list, ", got ", e)
 
@@ -160,10 +151,18 @@ for file in dirList:
     else:
         print("Oops - no residuals for " + file)
 df['Obs Code Agreement'] = (df['Obs Code'] == df['Magnitude Obs Code']).values
+mismatches = df[df['Obs Code Agreement']==False]["Bulletin"]
+count = len(mismatches.index)
+mismatches = mismatches.drop_duplicates().tolist()
+print("Found",count,"mismatches, or",(count/len(df.index))*100,"percent of all observations")
+df = df.drop(df[df["Obs Code Agreement"]==False].index)
+
 df.to_csv("../src/magsTMO_Bulletins.csv", index=False)
 print("Completed with the following issues:",issuesDict)
+print("And mismatches on the following bulletins:",mismatches)
+print(df)
 # except Exception as e:
 #     df.to_csv("../src/stats.csv", index=False)
-#     print("Oops! Exception! Saving df. Exception: ",e)
+#     # print("Oops! Exception! Saving df. Exception: ",e)
 
 # xargs -a file_list.txt mv -t /path/to/dest
