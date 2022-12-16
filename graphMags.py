@@ -1,7 +1,8 @@
 
 import matplotlib.colors as mcolors, matplotlib.pyplot as plt, math, re, sys, os, fileinput, shutil, random, numpy as np
 import pandas as pd
-# from pandas_profiling import ProfileReport
+import pandas_profiling
+from pandas_profiling import ProfileReport
 from datetime import datetime
 
 globalBins = None
@@ -34,14 +35,12 @@ class GraphObj:
             tempDf = df.loc[df["Obs Code"]==code]
             ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code, s=markerSize, marker=mark)
             if code == "654":
-                bins, medians = binning(code,tempDf[self.xAxis],tempDf[self.yAxis])
-                ax.scatter(bins, medians, color="#000000", label=code, s=25, marker="D")
+                bins, medians = binning(tempDf[self.xAxis],tempDf[self.yAxis])
+                plt.plot(bins, medians, color=colorDict[code], label=code, markersize=2, marker="D", linewidth = 3)
 
-            # trendline:
-            # if code=="654":
-            #     z = np.polyfit(tempDf[self.xAxis], tempDf[self.yAxis], 2)
-            #     p = np.poly1d(z)
-            #     plt.plot(sorted(tempDf[self.xAxis].values.tolist()), (p(sorted(tempDf[self.xAxis].values.tolist()))), "r-o",markersize=1)
+        notTMO = df.loc[df["Obs Code"]!="654"]
+        bins, medians = binning(notTMO[self.xAxis],notTMO[self.yAxis])
+        plt.plot(bins, medians, color="#0606A0", markersize=2, marker="D", linewidth = 3)
         plt.title(self.name+" "+self.yAxis)
         plt.xlabel(self.xAxis)
         plt.ylabel(self.yAxis)
@@ -54,17 +53,11 @@ class GraphObj:
             plt.show()
         plt.clf()
 
-def binning(name, x, y):
+def binning(x, y):
     global globalMeds, globalBins
     hist, globalBins = np.histogram(x, bins=12, range=(16,22))
     bin_centers = (np.asarray(globalBins[1:]) + np.asarray(globalBins[:-1])) / 2
     globalMeds = pd.Series(y).groupby(pd.cut(x, globalBins)).median()
-    # fig, ax = plt.subplots()
-    # ax.scatter(bin_centers, medians)
-    # plt.title('Histogram for '+name)
-    # plt.xlabel("Mag")
-    # plt.ylabel("Median Error")
-    # plt.show()
     return bin_centers,globalMeds
 
 def createLegend(keys):
@@ -93,17 +86,11 @@ for file in os.listdir("obsCodesToPlot"):
             split = line.split(", ")
             codes[split[0]] = split[1]
     currentDf = current.loc[current["Obs Code"].isin(codes)]
-    # profile = ProfileReport(currentDf, title="Profile of 2022 Observations by Top Follow Ups from Bulletins that Include TMO")
+    # profile = ProfileReport(currentDf, title="Profile of 2022 Observations by Magnitude")
     # profile.to_file("report"+file.replace('.txt','') + ".html")
     currentDf.to_csv("csvs/"+file.replace('.txt','')+".csv")
     graphs.append(GraphObj(file[:-4], currentDf,xAxis="Magnitude",yAxis="Diagonal Residual"))
 
 for graph in graphs:
     graph.graph()
-plt.clf()
-plt.title("TMO Error vs Magnitude")
-print(globalBins,globalMeds)
-plt.stairs(globalMeds,globalBins,fill = True)
-plt.savefig(graphPath + "TMO_MagBars" +".png")
-
 os.startfile(os.path.normpath(graphPath))
