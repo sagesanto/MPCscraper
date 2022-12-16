@@ -4,6 +4,8 @@ import pandas as pd
 # from pandas_profiling import ProfileReport
 from datetime import datetime
 
+globalBins = None
+globalMeds = None
 show = False
 useColors = False
 graphs = []
@@ -31,21 +33,39 @@ class GraphObj:
             markerSize = 9 if code=="654" else 1
             tempDf = df.loc[df["Obs Code"]==code]
             ax.scatter(tempDf[self.xAxis],tempDf[self.yAxis],c=colorDict[code],label=code, s=markerSize, marker=mark)
-            if code=="654":
-                z = np.polyfit(tempDf[self.xAxis], tempDf[self.yAxis], 2)
-                p = np.poly1d(z)
-                plt.plot(sorted(tempDf[self.xAxis].values.tolist()), (p(sorted(tempDf[self.xAxis].values.tolist()))), "r-o",markersize=1)
-        # ax.legend(loc='upper center', ncol=5, fancybox=True, shadow=True)
+            if code == "654":
+                bins, medians = binning(code,tempDf[self.xAxis],tempDf[self.yAxis])
+                ax.scatter(bins, medians, color="#000000", label=code, s=25, marker="D")
+
+            # trendline:
+            # if code=="654":
+            #     z = np.polyfit(tempDf[self.xAxis], tempDf[self.yAxis], 2)
+            #     p = np.poly1d(z)
+            #     plt.plot(sorted(tempDf[self.xAxis].values.tolist()), (p(sorted(tempDf[self.xAxis].values.tolist()))), "r-o",markersize=1)
         plt.title(self.name+" "+self.yAxis)
         plt.xlabel(self.xAxis)
         plt.ylabel(self.yAxis)
-        plt.ylim(-0.1,2.5)
+        plt.ylim(-0.1,1.5)
+        plt.xlim(18,22)
         plt.xticks()
         plt.tight_layout()
         plt.savefig(self.path + self.name +" "+self.yAxis +".png")
         if show:
             plt.show()
         plt.clf()
+
+def binning(name, x, y):
+    global globalMeds, globalBins
+    hist, globalBins = np.histogram(x, bins=12, range=(16,22))
+    bin_centers = (np.asarray(globalBins[1:]) + np.asarray(globalBins[:-1])) / 2
+    globalMeds = pd.Series(y).groupby(pd.cut(x, globalBins)).median()
+    # fig, ax = plt.subplots()
+    # ax.scatter(bin_centers, medians)
+    # plt.title('Histogram for '+name)
+    # plt.xlabel("Mag")
+    # plt.ylabel("Median Error")
+    # plt.show()
+    return bin_centers,globalMeds
 
 def createLegend(keys):
     global useColors
@@ -80,5 +100,10 @@ for file in os.listdir("obsCodesToPlot"):
 
 for graph in graphs:
     graph.graph()
+plt.clf()
+plt.title("TMO Error vs Magnitude")
+print(globalBins,globalMeds)
+plt.stairs(globalMeds,globalBins,fill = True)
+plt.savefig(graphPath + "TMO_MagBars" +".png")
 
 os.startfile(os.path.normpath(graphPath))
